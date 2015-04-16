@@ -1,43 +1,306 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>HPROSE by hprose</title>
-  </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#2b5797">
+	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+    <link rel="stylesheet" id="ppstyle" type="text/css" href="style.css">
+    <link rel='stylesheet' href='./css/font-awesome.min.css'/>
+    <link rel='stylesheet' href='./css/language.css'/>
+    <script src="./js/jquery-2.1.0.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/blocs.js"></script>
+    <title>Hprose Home</title>
+</head>
+<body>
+<!-- Main container -->
+<div class="page-container">
 
-  <body>
-    <div id="container">
-      <div class="inner">
+<!-- Hero Bloc -->
+<div id="hero-bloc" class="bloc hero bgc-1 bg d-bloc">
+	<div class="container hero-nav bloc-md">
+		<nav class="navbar row">
+			<div class="navbar-header">
+				<span class="navbar-brand"><img src="img/logo.png" alt='' />HPROSE</span>
+				<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
+					<span class="sr-only">切换导航</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse navbar-1">
+				<ul class="site-navigation nav">
+					<li>
+						<a href="index.html" class="ltc-4">主页</a>
+					</li>
+					<li>
+						<a href="documents.html" class="ltc-4">文档</a>
+					</li>
+					<li>
+						<a href="case.html" class="ltc-4">案例</a>
+					</li>
+					<li>
+						<a href="http://bbs.hprose.com/forum.php" class="ltc-4">论坛</a>
+					</li>
+					<li>
+						<a href="aboutus.html" class="ltc-4">团队</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div class="v-center text-center">
+		<div class="vc-content">
+			<h1 class="">
+				Hprose 带你来一场说走就走的旅行！
+			</h1>
+			<h3 class="text-center">
+				简洁、高效、易用
+			</h3><a id="scroll-hero" class="btn-dwn" href="#"><span class="fa fa-chevron-down"></span></a>
+		</div>
+	</div>
+</div>
+<!-- Hero Bloc END -->
 
-        <header>
-          <h1>HPROSE</h1>
-          <h2>High Performance Remote Object Service Engine</h2>
-        </header>
+<!-- bloc-2 -->
+<div class="bloc  l-bloc" id="bloc-2">
+	<div class="container bloc-md">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 class="mg-md text-center">
+					Hprose（High Performance Remote Object Service Engine）
+				</h2>
+				<p class="text-center">
+					是一款先进的轻量级、跨语言、跨平台、无侵入式、高性能动态远程对象调用引擎库。它不仅简单易用，而且功能强大。<br />你无需专门学习，只需看上几眼，就能用它轻松构建分布式应用系统。
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-2 END -->
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/hprose" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+<!-- bloc-3 -->
+<div class="bloc  l-bloc" id="bloc-3">
+	<div class="container bloc-md">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-java"><span class="fa icon-prog-java" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Java
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-dotnet"><span class="fa icon-prog-dotnet" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for .Net
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-go"><span class="fa icon-prog-golang02" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Golang
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-php"><span class="fa icon-prog-php02" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Php
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-3 END -->
 
-        <hr>
+<!-- bloc-4 -->
+<div class="bloc  l-bloc" id="bloc-4">
+	<div class="container bloc-md">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-ruby"><span class="fa icon-prog-ruby" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Ruby
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-python"><span class="fa icon-prog-python" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Python
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-objc"><span class="fa icon-prog-objc" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Objective-C
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-delphi"><span class="fa icon-prog-delphi02" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Delphi
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-4 END -->
 
-        <section id="main_content">
-          <p>Hprose is a modern, lightweight, cross-language, cross-platform, object-oriented, high performance, remote dynamic communication middleware. It is not only easy to use, but powerful. You just need a little time to learn, then you can use it to easily construct cross language cross platform distributed application system.</p>
-        </section>
+<!-- bloc-5 -->
+<div class="bloc  l-bloc" id="bloc-5">
+	<div class="container bloc-md">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-nodejs"><span class="fa icon-prog-nodejs02" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Node.js
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-js"><span class="fa icon-prog-js02" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for JavaScript
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-html5"><span class="fa icon-html5-01" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Html5
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-as3"><span class="fa icon-prog-actionscript" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for ActionScript
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-5 END -->
 
-        <footer>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<!-- bloc-6 -->
+<div class="bloc  l-bloc" id="bloc-6">
+	<div class="container bloc-md">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-d"><span class="fa icon-dlang" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Dlang
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-dart"><span class="fa icon-pl-dart" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Dart
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-lua"><span class="fa icon-prog-lua02" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Lua
+				</h3>
+			</div>
+			<div class="col-sm-3">
+				<div class="text-center">
+					<a href="https://github.com/hprose/hprose-perl"><span class="fa icon-prog-perl" style="font-size:5em"></span></a>
+				</div>
+				<h3 class="text-center mg-md">
+					Hprose for Perl
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-6 END -->
 
-        
-      </div>
-    </div>
-  </body>
+<!-- Footer - bloc-11 -->
+<div class="bloc  l-bloc" id="bloc-11">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="text-center">
+				<a href="https://github.com/hprose" class="btn btn-c-1 btn-sq btn-lg" target="_blank">查看更多Hprose支持的语言版本</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Footer - bloc-11 END -->
+
+<!-- Footer - bloc-12 -->
+<div class="bloc  d-bloc" id="bloc-12">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-3">
+				<h3>
+					获取 Hprose
+				</h3>
+				<a href="https://github.com/hprose" class="a-btn a-block">GitHub</a>
+				<a href="http://www.oschina.net/p/hprose" class="a-btn a-block">开源中国</a>
+			</div>
+			<div class="col-sm-3">
+				<h3>
+					帮助支持
+				</h3>
+				<a target="_blank" class="a-btn a-block" href="http://shang.qq.com/wpa/qunwpa?idkey=ce62ff1045dd1c0c11fcedac3166f6f290eab4be23644ac3882fbdd15c24cad6"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="Hprose 技术交流群" title="Hprose 技术交流群"></a>
+				<a href="mailto:support@hprose.com" class="a-btn a-block">support@hprose.com</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Footer - bloc-12 END -->
+</div>
+<!-- Main container END -->
+
+</body>
+    
+<!-- Google Analytics -->
+
+<!-- Google Analytics END -->
+
 </html>
