@@ -14,7 +14,7 @@
  *                                                        *
  * hprose swoole socket service library for php 5.3+      *
  *                                                        *
- * LastModified: Apr 17, 2015                             *
+ * LastModified: Apr 20, 2015                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
@@ -69,7 +69,7 @@ namespace Hprose\Swoole\Socket {
                 $setting['package_max_length'] = $this->return_bytes(ini_get('memory_limit'));
             }
             if ($setting['package_max_length'] < 0) {
-                $setting['package_max_length'] = 0x80000000;
+                $setting['package_max_length'] = 0x7fffffff;
             }
             $server->set($setting);
             $server->on("receive", function ($server, $fd, $from_id, $data) use($self) {
@@ -80,7 +80,7 @@ namespace Hprose\Swoole\Socket {
                 $context->userdata = new \stdClass();
 
                 set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($self, $context) {
-                    if ($self->debug) {
+                    if ($self->isDebugEnabled()) {
                         $errstr .= " in $errfile on line $errline";
                     }
                     $error = $self->getErrorTypeString($errno) . ": " . $errstr;
@@ -90,7 +90,7 @@ namespace Hprose\Swoole\Socket {
                 ob_start(function ($data) use ($self, $context) {
                     $match = array();
                     if (preg_match('/<b>.*? error<\/b>:(.*?)<br/', $data, $match)) {
-                        if ($self->debug) {
+                        if ($self->isDebugEnabled()) {
                             $error = preg_replace('/<.*?>/', '', $match[1]);
                         }
                         else {
@@ -137,7 +137,6 @@ namespace Hprose\Swoole\Socket {
                         break;
                     default:
                         throw new \Exception("Only support tcp, tcp4, tcp6 or unix scheme");
-                        break;
                 }
             }
             else {

@@ -10,16 +10,17 @@
 
 /**********************************************************\
  *                                                        *
- * Hprose/Swoole/Http/Service.php                         *
+ * Hprose/Symfony/Server.php                              *
  *                                                        *
- * hprose swoole http service library for php 5.3+        *
+ * hprose symfony http server class for php 5.3+          *
  *                                                        *
  * LastModified: Apr 20, 2015                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Swoole\Http {
+namespace Hprose\Symfony {
+
     class Service extends \Hprose\Service {
         private $crossDomain = false;
         private $P3P = false;
@@ -32,29 +33,26 @@ namespace Hprose\Swoole\Http {
                 $sendHeader = $this->onSendHeader;
                 $sendHeader($context);
             }
-            $request = $context->request;
-            $response = $context->response;
-            $response->header('Content-Type', 'text/plain');
+            $context->response->headers->set('Content-Type', 'text/plain');
             if ($this->P3P) {
-                $response->header('P3P',
-                       'CP="CAO DSP COR CUR ADM DEV TAI PSA PSD ' .
-                       'IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi ' .
-                       'UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV ' .
-                       'INT DEM CNT STA POL HEA PRE GOV"');
+                $context->response->headers->set('P3P',
+                        'CP="CAO DSP COR CUR ADM DEV TAI PSA PSD ' .
+                        'IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi ' .
+                        'UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV ' .
+                        'INT DEM CNT STA POL HEA PRE GOV"');
             }
             if ($this->crossDomain) {
-                if (array_key_exists('http_origin', $request->header) &&
-                    $request->header['http_origin'] != "null") {
-                    $origin = $request->header['http_origin'];
+                if ($context->request->server->has('HTTP_ORIGIN') &&
+                    $context->request->server->get('HTTP_ORIGIN') != "null") {
+                    $origin = $context->request->server->get('HTTP_ORIGIN');
                     if (count($this->origins) === 0 ||
-                        array_key_exists(strtolower($origin), $this->origins)) {
-                        $response->header('Access-Control-Allow-Origin', $origin);
-                        $response->header('Access-Control-Allow-Credentials',
-                                         'true');
+                        isset($this->origins[strtolower($origin)])) {
+                        $context->response->headers->set('Access-Control-Allow-Origin', $origin);
+                        $context->response->headers->set('Access-Control-Allow-Credentials', 'true');
                     }
                 }
                 else {
-                    $response->header('Access-Control-Allow-Origin', '*');
+                    $context->response->headers->set('Access-Control-Allow-Origin', '*');
                 }
             }
         }
@@ -90,25 +88,25 @@ namespace Hprose\Swoole\Http {
             }
             unset($this->origins[strtolower($origin)]);
         }
-        public function handle($request, $response) {
-            $data = $request->rawContent();
-
+        public function handle($request, $response, $session) {
+            $data = $request->getContent();
             $context = new \stdClass();
             $context->server = $this;
             $context->request = $request;
             $context->response = $response;
+            $context->session = $session;
             $context->userdata = new \stdClass();
-
             $self = $this;
 
-            set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($self, $context) {
+            set_error_handler(function($errno, $errstr, $errfile, $errline) use ($self, $context) {
                 if ($self->isDebugEnabled()) {
                     $errstr .= " in $errfile on line $errline";
                 }
                 $error = $self->getErrorTypeString($errno) . ": " . $errstr;
-                $context->response->end($self->sendError($error, $context));
+                $context->response->setContent($self->sendError($error, $context));
             }, $this->error_types);
-            ob_start(function ($data) use ($self, $context) {
+
+            ob_start(function($data) use ($self, $context) {
                 $match = array();
                 if (preg_match('/<b>.*? error<\/b>:(.*?)<br/', $data, $match)) {
                     if ($self->isDebugEnabled()) {
@@ -117,41 +115,43 @@ namespace Hprose\Swoole\Http {
                     else {
                         $error = preg_replace('/ in <b>.*<\/b>$/', '', $match[1]);
                     }
-                    $data = $self->sendError(trim($error), $context);
-                    $context->response->end($data);
+                    $context->response->setContent($self->sendError(trim($error), $context));
                 }
             });
             ob_implicit_flush(0);
 
             $this->sendHeader($context);
             $result = '';
-            if (($request->server['request_method'] == 'GET') && $this->get) {
-                $result = $this->doFunctionList($context);
+
+            if ($request->server->has('REQUEST_METHOD')) {
+                if (($request->server->get('REQUEST_METHOD') == 'GET') && $this->get) {
+                    $result = $this->doFunctionList($context);
+                }
+                elseif ($request->server->get('REQUEST_METHOD') == 'POST') {
+                    $result = $this->defaultHandle($data, $context);
+                }
             }
-            elseif ($request->server['request_method'] == 'POST') {
-                $result = $this->defaultHandle($data, $context);
+            else {
+                $result = $this->doFunctionList($context);
             }
             ob_clean();
             ob_end_flush();
-            restore_error_handler();
-            $response->end($result);
+            $response->setContent($result);
+            return $response;
         }
     }
 
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpFoundation\Session\Session;
+
     class Server extends Service {
-        private $http;
-        public function __construct($host, $port) {
-            $this->http = new \swoole_http_server($host, $port);
-        }
-        public function set($setting) {
-            $this->http->set($setting);
-        }
-        public function addListener($host, $port) {
-            $this->http->addListener($host, $port);
-        }
         public function start() {
-            $this->http->on('request', array($this, 'handle'));
-            $this->http->start();
+            $request = Request::createFromGlobals();
+            $response = new Response();
+            $session = new Session();
+            $session->start();
+            return $this->handle($request, $response, $session);
         }
     }
 }

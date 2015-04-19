@@ -14,7 +14,7 @@
  *                                                        *
  * hprose swoole websocket service library for php 5.3+   *
  *                                                        *
- * LastModified: Apr 17, 2015                             *
+ * LastModified: Apr 20, 2015                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
@@ -30,8 +30,8 @@ namespace Hprose\Swoole\WebSocket {
             $id = substr($data, 0, 4);
             $data = substr($data, 4);
 
-            set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($self, $context) {
-                if ($self->debug) {
+            set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($self, $context, $id) {
+                if ($self->isDebugEnabled()) {
                     $errstr .= " in $errfile on line $errline";
                 }
                 $error = $self->getErrorTypeString($errno) . ": " . $errstr;
@@ -39,10 +39,10 @@ namespace Hprose\Swoole\WebSocket {
                 $context->server->push($context->fd, $id . $data, true);
             }, $this->error_types);
 
-            ob_start(function ($data) use ($self, $context) {
+            ob_start(function ($data) use ($self, $context, $id) {
                 $match = array();
                 if (preg_match('/<b>.*? error<\/b>:(.*?)<br/', $data, $match)) {
-                    if ($self->debug) {
+                    if ($self->isDebugEnabled()) {
                         $error = preg_replace('/<.*?>/', '', $match[1]);
                     }
                     else {
@@ -64,6 +64,16 @@ namespace Hprose\Swoole\WebSocket {
         public function set_ws_handle($server) {
             $self = $this;
             $buffers = array();
+            $server->on('open', function ($server, $request) use (&$buffers) {
+                if (isset($buffers[$request->fd])) {
+                    unset($buffers[$request->fd]);
+                }
+            });
+            $server->on('close', function ($server, $fd) use (&$buffers) {
+                if (isset($buffers[$fd])) {
+                    unset($buffers[$fd]);
+                }
+            });
             $server->on('message', function($server, $frame) use (&$buffers, $self) {
                 if (isset($buffers[$frame->fd])) {
                     if ($frame->finish) {
