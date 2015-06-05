@@ -1,7 +1,7 @@
 <?php
     date_default_timezone_set('Asia/Shanghai');
 
-    include('hprose/Hprose.php');
+    include('Hprose.php');
 
     define("SEX_UNKNOWN", 0);
     define("SEX_MALE", 1);
