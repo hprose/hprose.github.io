@@ -1,6 +1,6 @@
 <?php
+    session_start();
     date_default_timezone_set('Asia/Shanghai');
-
     include('Hprose.php');
 
     define("SEX_UNKNOWN", 0);
@@ -39,6 +39,10 @@
         return $sum;
     }
 
+    function inc() {
+        return $_SESSION['n']++;
+    }
+
     function swapKeyAndValue(&$trans) {
         $trans = array_flip($trans);
         return $trans;
@@ -61,6 +65,7 @@
     $server = new HproseHttpServer();
     $server->addFunction('hello');
     $server->addFunction('sum');
+    $server->addFunction('inc');
     $server->addFunction('swapKeyAndValue');
     $server->addFunction('getUserList');
     $server->addFunction('swap');
