@@ -5,11 +5,6 @@
 <title>Nepenthes</title>
 <link type="text/css" href="js/jquery-ui/css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 <style type="text/css">
-#tabs-2{
-	overflow-y: scroll; 
-	height: 300px;
-	
-}
 #no_hprose_server_url, #hprose_server_error, #hprose_server_url_error{
 	display:none;
 }
@@ -17,7 +12,7 @@
 </head>
 <body>
 <div id="no_hprose_server_url" title="Error" rel="localize[no_hprose_server_url]">
-Please input Hprose server url!!	
+Please input Hprose server url!!
 </div>
 <div id="hprose_server_error" title="Error" rel="localize[hprose_server_error]">
 The Hprose Server Error!!
@@ -41,21 +36,21 @@ The Hprose Server Url Error!!
 		</p>
 	</div>
 	<div id="tabs-2">
-		
-			
+
+
 	</div>
 	<div id="tabs-3">
-		
+
 			<span rel="localize[hprose_server_url]">Hprose Server URL</span> : <input id="c_hprose_url" type="text" name="c_hprose_url" size="70"></input>
 			<br /><br />
 			<span rel="localize[function_name]">Function Name</span> : <input id="c_func_name" type="text" name="c_func_name" size="70"></input>
 			<br /><br />
-			<textarea class="paras" rows="2" cols="80" type="text" name="paras">parameter(json formate, ex: "hello", 3.14, true, {'name': 'lex'}, [1,2,3])</textarea> 
+			<textarea class="paras" rows="2" cols="80" type="text" name="paras">parameter(json formate, ex: "hello", 3.14, true, {'name': 'lex'}, [1,2,3])</textarea>
 			<input class="c_rpc" name="call_rpc" type="button" value="Call" rel="localize[hprose_call]"></input>
-		
+
 	</div>
 	<div id="tabs-4">
-		<span rel="localize[lang]">Language</span> : 
+		<span rel="localize[lang]">Language</span> :
 		<select id="lang_setting" name="lang_setting">
 			<option value="en" selected>English</option>
 			<option value="cn">简体中文</option>
