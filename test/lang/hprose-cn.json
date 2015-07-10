@@ -1,0 +1,14 @@
+{ 
+  hprose_server_url: "Hprose 服务器网址",
+  hprose_func_list: "Hprose 参数列表",
+  customize_hprose_func_call: "自订 Hprose 调用方法",
+  get_function_list: "获取 Hprose 方法列表",
+  function_name: "方法名称",
+  hprose_call: "调用",
+  just_a_moment: "请稍候…",
+  no_hprose_server_url: "请输入 Hprose 服务器网址!!",
+  hprose_server_error: "Hprose 服务器调用发生错误!!",
+  hprose_server_url_error: "错误的 Hprose 服务器网址!!",
+  setting: "设置",
+  lang: "语言"
+}

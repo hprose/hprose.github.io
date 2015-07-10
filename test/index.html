@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Nepenthes</title>
+<link type="text/css" href="js/jquery-ui/css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+<style type="text/css">
+#tabs-2{
+	overflow-y: scroll; 
+	height: 300px;
+	
+}
+#no_hprose_server_url, #hprose_server_error, #hprose_server_url_error{
+	display:none;
+}
+</style>
+</head>
+<body>
+<div id="no_hprose_server_url" title="Error" rel="localize[no_hprose_server_url]">
+Please input Hprose server url!!	
+</div>
+<div id="hprose_server_error" title="Error" rel="localize[hprose_server_error]">
+The Hprose Server Error!!
+</div>
+<div id="hprose_server_url_error" title="Error" rel="localize[hprose_server_url_error]">
+The Hprose Server Url Error!!
+</div>
+<div class="demo">
+
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1" rel="localize[hprose_server_url]">Hprose Server URL</a></li>
+		<li><a href="#tabs-2" rel="localize[hprose_func_list]">Hprose Serer Function List</a></li>
+		<li><a href="#tabs-3" rel="localize[customize_hprose_func_call]">Customize Hprose Function Call</a></li>
+		<li><a href="#tabs-4" rel="localize[setting]">Setting</a></li>
+	</ul>
+	<div id="tabs-1">
+		<p>
+		<span rel="localize[hprose_server_url]">Hprose Server URL</span> : <input id="hprose_url" type="text" name="hprose_url" size="70"></input>
+		<input id="get_func" name="get_func" type="button" value="Get Functions" rel="localize[get_function_list]"></input>
+		</p>
+	</div>
+	<div id="tabs-2">
+		
+			
+	</div>
+	<div id="tabs-3">
+		
+			<span rel="localize[hprose_server_url]">Hprose Server URL</span> : <input id="c_hprose_url" type="text" name="c_hprose_url" size="70"></input>
+			<br /><br />
+			<span rel="localize[function_name]">Function Name</span> : <input id="c_func_name" type="text" name="c_func_name" size="70"></input>
+			<br /><br />
+			<textarea class="paras" rows="2" cols="80" type="text" name="paras">parameter(json formate, ex: "hello", 3.14, true, {'name': 'lex'}, [1,2,3])</textarea> 
+			<input class="c_rpc" name="call_rpc" type="button" value="Call" rel="localize[hprose_call]"></input>
+		
+	</div>
+	<div id="tabs-4">
+		<span rel="localize[lang]">Language</span> : 
+		<select id="lang_setting" name="lang_setting">
+			<option value="en" selected>English</option>
+			<option value="cn">简体中文</option>
+			<option value="tw">正體中文</option>
+		</select>
+	</div>
+</div>
+
+</div><!-- End demo -->
+
+<script type='text/javascript' src='./js/AIRAliases.js'></script>
+<script type='text/javascript' src='./js/jquery/jquery-1.3.2.min.js'></script>
+<script type="text/javascript" src="./js/jquery/jquery.elastic.js"></script>
+<script type="text/javascript" src="./js/jquery/jquery.localize.js"></script>
+<script type="text/javascript" src="./js/jquery/jquery.cookie.js"></script>
+<script type='text/javascript' src='./js/jquery-ui/js/jquery-ui-1.7.2.custom.min.js'></script>
+<script type='text/javascript' src='./js/jquery/jquery.blockUI.js'></script>
+<script type='text/javascript' src='./js/hprose/hprose.js'></script>
+<script type='text/javascript' src='./js/firebug/firebug-lite-compressed.js'></script>
+<script type="text/javascript" src="./js/main.js"></script>
+</body>
+</html>

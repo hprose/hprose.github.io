@@ -1,0 +1,14 @@
+{ 
+  hprose_server_url: "Hprose 伺服器網址",
+  hprose_func_list: "Hprose 參數列表",
+  customize_hprose_func_call: "自訂 Hprose 呼叫函數",
+  get_function_list: "獲取 Hprose 函數列表",
+  function_name: "函數名稱",
+  hprose_call: "呼叫",
+  just_a_moment: "請稍候…",
+  no_hprose_server_url: "請輸入 Hprose 伺服器網址!!",
+  hprose_server_error: "Hprose 伺服器呼叫發生錯誤!!",
+  hprose_server_url_error: "錯誤的 Hprose 伺服器網址!!",
+  setting: "設定",
+  lang: "語言"
+}

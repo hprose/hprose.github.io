@@ -1,0 +1,14 @@
+{ 
+  hprose_server_url: "Hprose Server URL",
+  hprose_func_list: "Hprose Serer Function List",
+  customize_hprose_func_call: "Customize Hprose Function Call",
+  get_function_list: "Get Functions",
+  function_name: "Function Name",
+  hprose_call: "Call",
+  just_a_moment: "Just a moment...",
+  no_hprose_server_url: "Please input Hprose server url!!",
+  hprose_server_error: "The Hprose Server Error!!",
+  hprose_server_url_error: "The Hprose Server Url Error!!",
+  setting: "Setting",
+  lang: "Language"
+}
