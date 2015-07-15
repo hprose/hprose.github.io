@@ -27,8 +27,8 @@
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="./css/docs.min.css">
     <link rel="stylesheet" id="ppstyle" type="text/css" href="style.css">
-    <link rel='stylesheet' href='./css/font-awesome.min.css'/>
-    <link rel='stylesheet' href='./css/language.css'/>
+    <link rel="stylesheet" href="./css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./css/language.css" />
     <script src="./js/jquery-2.1.0.min.js"></script>
     <script src="./js/bootstrap.js"></script>
     <script src="./js/docs.min.js"></script>
@@ -46,7 +46,7 @@
 			<div class="container bloc-md">
 				<nav class="navbar row">
 					<div class="navbar-header">
-						<span class="navbar-brand"><img src="img/logo.png" alt='' />HPROSE</span>
+						<span class="navbar-brand"><img src="img/logo.png" alt="" />HPROSE</span>
 						<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
 							<span class="sr-only">切换导航</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 						</button>
@@ -96,6 +96,18 @@
 	<div class="container bs-docs-container">
 		<div class="row">
 			<div class="col-md-9" role="main">
+                <div class="bs-docs-section">
+					<h3 class="mg-md" id="feather_weight">
+						<span class="fa fa-bookmark"></span> FeatherWeight
+					</h3>
+					<p>FeatherWeight is a data store provider that dumps its contents to the harddrive upon exiting and will re-load that very data upon relaunch, enabling for it to be persistent across runs, allowing it to react fast and provide reliable data retrievability and avoid to rebuild the cache.</p>
+					<p>Redis is currently used as an IPC/RPC, but due to hprose, this can easily be dropped and changed/reimplemented. PHP can communicate with FeatherWeight through hprose, as well as other languages.</p>
+                    <p>This will NOT replace the depdendency on MySQL. This is soley an object cache.</p>
+					<p><a href="https://github.com/DragonsInn/FeatherWeight">https://github.com/DragonsInn/FeatherWeight</a></p>
+					<div class="divider-h">
+						<span class="divider"></span>
+					</div>
+				</div>
 				<div class="bs-docs-section">
 					<h3 class="mg-md" id="yanji_news">
 						<span class="fa fa-bookmark"></span> 延吉新闻网
