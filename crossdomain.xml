@@ -2,14 +2,14 @@
 
 <!DOCTYPE cross-domain-policy SYSTEM
 
-	"http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd" >
+    "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd" >
 
 <cross-domain-policy>
 
-	<site-control permitted-cross-domain-policies="all" />
+    <site-control permitted-cross-domain-policies="all" />
 
-	<allow-access-from domain="*" />
+    <allow-access-from domain="*" />
 
-	<allow-http-request-headers-from domain="*" headers="*"/>
+    <allow-http-request-headers-from domain="*" headers="*"/>
 
 </cross-domain-policy>
