@@ -14,7 +14,7 @@
  *                                                        *
  * hprose swoole socket service library for php 5.3+      *
  *                                                        *
- * LastModified: May 8, 2015                              *
+ * LastModified: Dec 11, 2015                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
@@ -38,26 +38,12 @@ namespace Hprose\Swoole\Socket {
             if (!$server->send($fd, pack("N", $len))) {
                 return false;
             }
-            for ($i = 0; $i < $len; ++$i) {
+            for ($i = 0; $i < $len; $i += self::MAX_PACK_LEN) {
                 if (!$server->send($fd, substr($data, $i, min($len - $i, self::MAX_PACK_LEN)))) {
                     return false;
                 }
-                $i += self::MAX_PACK_LEN;
             }
             return true;
-        }
-        private function return_bytes($val) {
-            $val = trim($val);
-            $last = strtolower($val{strlen($val)-1});
-            switch($last) {
-                case 'g':
-                    $val *= 1024;
-                case 'm':
-                    $val *= 1024;
-                case 'k':
-                    $val *= 1024;
-            }
-            return $val;
         }
         public function set($setting) {
             $this->setting = array_replace($this->setting, $setting);
@@ -65,11 +51,9 @@ namespace Hprose\Swoole\Socket {
         public function handle($server) {
             $self = $this;
             $setting = array_replace($this->setting, self::$default_setting);
-            if (!isset($setting['package_max_length'])) {
-                $setting['package_max_length'] = $this->return_bytes(ini_get('memory_limit'));
-            }
-            if ($setting['package_max_length'] < 0) {
-                $setting['package_max_length'] = 0x7fffffff;
+            if (!isset($setting['package_max_length']) ||
+                $setting['package_max_length'] < 0) {
+                $setting['package_max_length'] = self::MAX_PACK_LEN * 4;
             }
             $server->set($setting);
             $server->on("receive", function ($server, $fd, $from_id, $data) use($self) {

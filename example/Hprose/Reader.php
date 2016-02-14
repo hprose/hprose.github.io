@@ -14,7 +14,7 @@
  *                                                        *
  * hprose reader class for php 5.3+                       *
  *                                                        *
- * LastModified: Mar 27, 2015                             *
+ * LastModified: Jan 5, 2016                              *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
@@ -29,7 +29,7 @@ namespace Hprose {
     class FakeReaderRefer implements ReaderRefer {
         public function set($val) {}
         public function read($index) {
-            throw new Exception("Unexpected serialize tag '" .
+            throw new \Exception("Unexpected serialize tag '" .
                                        Tags::TagRef .
                                        "' in stream");
         }
@@ -299,10 +299,10 @@ namespace Hprose {
                 }
             }
             if ($tag == Tags::TagUTC) {
-                $time = date_create_from_format('Hisu', $hms.$u, timezone_open('UTC'));
+                $time = date_create_from_format('!Hisu', $hms.$u, timezone_open('UTC'));
             }
             else {
-                $time = date_create_from_format('Hisu', $hms.$u);
+                $time = date_create_from_format('!Hisu', $hms.$u);
             }
             $this->refer->set($time);
             return $time;
@@ -453,7 +453,15 @@ namespace Hprose {
                         $property->setValue($object, $value);
                     }
                     else {
-                        $object->$prop = $value;
+                        $p = strtoupper($prop[0]) . substr($prop, 1);
+                        if ($reflector->hasProperty($p)) {
+                            $property = $reflector->getProperty($p);
+                            $property->setAccessible(true);
+                            $property->setValue($object, $value);
+                        }
+                        else {
+                            $object->$prop = $value;
+                        }
                     }
                 }
             }

@@ -14,13 +14,14 @@
  *                                                        *
  * hprose swoole http service library for php 5.3+        *
  *                                                        *
- * LastModified: May 8, 2015                              *
+ * LastModified: Jun 28, 2015                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
 namespace Hprose\Swoole\Http {
     class Service extends \Hprose\Base\Service {
+        const MAX_PACK_LEN = 0x200000;
         private $crossDomain = false;
         private $P3P = false;
         private $get = true;
@@ -30,7 +31,7 @@ namespace Hprose\Swoole\Http {
         private function sendHeader($context) {
             if ($this->onSendHeader !== null) {
                 $sendHeader = $this->onSendHeader;
-                $sendHeader($context);
+                call_user_func($sendHeader, $context);
             }
             $request = $context->request;
             $response = $context->response;
@@ -57,6 +58,21 @@ namespace Hprose\Swoole\Http {
                     $response->header('Access-Control-Allow-Origin', '*');
                 }
             }
+        }
+        private function send($data, $response) {
+            $len = strlen($data);
+            if ($len <= self::MAX_PACK_LEN) {
+                $response->end($data);
+            }
+            else {
+                for ($i = 0; $i < $len; $i += self::MAX_PACK_LEN) {
+                    if (!$response->write(substr($data, $i, min($len - $i, self::MAX_PACK_LEN)))) {
+                        return false;
+                    }
+                }
+                $response->end();
+            }
+            return true;
         }
         public function isCrossDomainEnabled() {
             return $this->crossDomain;
@@ -101,7 +117,7 @@ namespace Hprose\Swoole\Http {
 
             $self = $this;
             $this->user_fatal_error_handler = function($error) use ($self, $context) {
-                $context->response->end($self->sendError($error, $context));
+                $self->send($self->sendError($error, $context), $context->response);
             };
 
             $this->sendHeader($context);
@@ -113,10 +129,12 @@ namespace Hprose\Swoole\Http {
                 $result = $this->defaultHandle($data, $context);
             }
             if ($result instanceof \Hprose\Future) {
-                $result->then(function($result) use ($response) { $response->end($result); });
+                $result->then(function($result) use ($self, $response) {
+                    $self->send($result, $response);
+                });
             }
             else {
-                $response->end($result);
+                $this->send($result, $response);
             }
         }
     }
