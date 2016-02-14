@@ -72,7 +72,7 @@
     $server->addFunction('print_r');
     $server->addFilter(new HproseJSONRPCServiceFilter());
     $server->addFilter(new HproseXMLRPCServiceFilter());
-    $server->setDebugEnabled(true);
+    $server->setDebugEnabled(false);
     $server->setCrossDomainEnabled(true);
     $server->setP3PEnabled(true);
     $server->start();
