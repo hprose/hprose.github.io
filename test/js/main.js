@@ -54,7 +54,8 @@ $(document).ready(function(){
     }
     $.blockUI({message:"<h1 rel=\"localize[just_a_moment]\">Just a moment...</h1>"});
     $("[rel*=localize]").localize("hprose",lang_opts);
-    client=new HproseHttpClient(_);
+    client=new HproseHttpClient();
+    client.useService(_, true);
     client_onready(false);
   });
   $(".rpc").live("click",function(){
@@ -90,7 +91,8 @@ $(document).ready(function(){
       $("#hprose_server_url_error").dialog("open");
       return false;
     }
-    client=new HproseHttpClient(hprose_url);
+    client=new HproseHttpClient();
+    client.useService(hprose_url, true);
     client_onready(true);
     var rpc_name=$("#c_func_name").val(),para=$(this).prev().val();
     if(para.substr(0,4)=="para"){
