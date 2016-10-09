@@ -66,9 +66,7 @@ $(document).ready(function(){
       $(this).prev().val("");
     }
     try{
-      var args=eval("(["+para+"])");
-      args.unshift(rpc_name);
-      args.push(function(A,_){
+      client.invoke(rpc_name,eval("(["+para+"])"),function(A,_){
         if(typeof (A)=="string"||typeof (A)=="number"||A==null){
           console.info(A);
         }else {
@@ -76,7 +74,6 @@ $(document).ready(function(){
         }
         $.unblockUI();
       });
-      client.invoke.apply(client,args);
     }
     catch(err){
       $.unblockUI();
@@ -100,16 +97,13 @@ $(document).ready(function(){
       $(this).prev().val("");
     }
     try{
-      var args=eval("(["+para+"])");
-      args.unshift(rpc_name);
-      args.push(function($,_){
+      client.invoke(rpc_name, eval("(["+para+"])"), function($,_){
         if(typeof ($)=="string"||typeof ($)=="number"||$==null){
           console.info($);
         }else {
           console.dir($);
         }
       });
-      client.invoke.apply(client,args);
     }
     catch(err){
       $.unblockUI();
