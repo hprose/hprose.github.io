@@ -25,7 +25,7 @@ function client_onready(_){
     }
     $.unblockUI();
   });
-  client.onError=function(_,A){
+  client.onerror=function(_,A){
     $.unblockUI();
     $("#hprose_server_error").dialog({bgiframe:true,height:140,modal:true});
     $("#hprose_server_error").dialog("open");
