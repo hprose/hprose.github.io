@@ -3,8 +3,8 @@
  */
 firebug.env.height=200;
 var client=null,isValid=false,lang=$.cookie("lang")?$.cookie("lang"):"en",lang_opts={language:lang,pathPrefix:"lang"};
-function client_onready(_,A){
-  client.ready(function(){
+function client_onready(_){
+  client.ready(function(A){
     var D=0,C="<div id=\"accordion\">";
     for(var B in A){
       C+="<h3><a href=\"#\">"+B+"</a></h3><div>";
@@ -54,9 +54,8 @@ $(document).ready(function(){
     }
     $.blockUI({message:"<h1 rel=\"localize[just_a_moment]\">Just a moment...</h1>"});
     $("[rel*=localize]").localize("hprose",lang_opts);
-    client=new HproseHttpClient();
-    var A=client.useService(_, true);
-    client_onready(false,A);
+    client=new HproseHttpClient(_);
+    client_onready(false);
   });
   $(".rpc").live("click",function(){
     $.blockUI({message:"<h1 rel=\"localize[just_a_moment]\">Just a moment...</h1>"});
@@ -91,9 +90,8 @@ $(document).ready(function(){
       $("#hprose_server_url_error").dialog("open");
       return false;
     }
-    client=new HproseHttpClient();
-    var service_proxy=client.useService(hprose_url, true);
-    client_onready(true,service_proxy);
+    client=new HproseHttpClient(hprose_url);
+    client_onready(true);
     var rpc_name=$("#c_func_name").val(),para=$(this).prev().val();
     if(para.substr(0,4)=="para"){
       para="";
