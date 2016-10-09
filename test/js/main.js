@@ -80,7 +80,7 @@ $(document).ready(function(){
     }
     catch(err){
       $.unblockUI();
-      console.dir(err);
+      console.dir(err.stack || err);
     }
   });
   $(".c_rpc").click(function(){
@@ -113,7 +113,7 @@ $(document).ready(function(){
     }
     catch(err){
       $.unblockUI();
-      console.dir(err);
+      console.dir(err.stack || err);
     }
   });
   $(".paras").live("dblclick",function(){
