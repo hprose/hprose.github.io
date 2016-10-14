@@ -1,26 +1,89 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?-vx1aw1');
-	src:url('../fonts/icomoon.eot?#iefix-vx1aw1') format('embedded-opentype'),
-		url('../fonts/icomoon.woff?-vx1aw1') format('woff'),
-		url('../fonts/icomoon.ttf?-vx1aw1') format('truetype'),
-		url('../fonts/icomoon.svg?-vx1aw1#icomoon') format('svg');
+	src: url('../fonts/icomoon.eot?fw5g3b');
+	src: url('../fonts/icomoon.eot?fw5g3b#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?fw5g3b') format('truetype'), url('../fonts/icomoon.woff?fw5g3b') format('woff'), url('../fonts/icomoon.svg?fw5g3b#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
-	font-family: 'icomoon';
+[class^="icon-"],
+[class*=" icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
-
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-lang-julia .path1:before {
+	content: "\e900";
+	color: rgb(0, 0, 0);
+}
+
+.icon-lang-julia .path2:before {
+	content: "\e901";
+	margin-left: -1.435546875em;
+	color: rgb(0, 0, 0);
+}
+
+.icon-lang-julia .path3:before {
+	content: "\e902";
+	margin-left: -1.435546875em;
+	color: rgb(0, 0, 0);
+}
+
+.icon-lang-julia .path4:before {
+	content: "\e903";
+	margin-left: -1.435546875em;
+	color: rgb(0, 0, 0);
+}
+
+.icon-lang-julia .path5:before {
+	content: "\e904";
+	margin-left: -1.435546875em;
+	color: rgb(37, 37, 37);
+}
+
+.icon-lang-julia .path6:before {
+	content: "\e905";
+	margin-left: -1.435546875em;
+	color: rgb(37, 37, 37);
+}
+
+.icon-lang-julia .path7:before {
+	content: "\e906";
+	margin-left: -1.435546875em;
+	color: rgb(37, 37, 37);
+}
+
+.icon-lang-julia .path8:before {
+	content: "\e907";
+	margin-left: -1.435546875em;
+	color: rgb(37, 37, 37);
+}
+
+.icon-lang-julia .path9:before {
+	content: "\e908";
+	margin-left: -1.435546875em;
+	color: rgb(37, 37, 37);
+}
+
+.icon-lang-crystal:before {
+	content: "\e909";
+}
+
+.icon-lang-swift:before {
+	content: "\e90a";
+}
+
+.icon-lang-rust:before {
+	content: "\e90b";
 }
 
 .icon-dlang:before {
@@ -1303,10 +1366,6 @@
 	content: "\e73f";
 }
 
-.icon-prog-cplusplus2:before {
-	content: "\e740";
-}
-
 .icon-prog-csharp2:before {
 	content: "\e741";
 }
@@ -2154,4 +2213,3 @@
 .icon-linkedin2:before {
 	content: "\e814";
 }
-
