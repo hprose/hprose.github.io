@@ -1,4 +1,134 @@
-/*
- * Compressed by JSA(www.xidea.org)
- */
-eval(function(B,D,A,G,E,F){function C(A){return A<62?String.fromCharCode(A+=A<26?65:A<52?71:-4):A<63?'_':A<64?'$':C(A>>6)+C(A&63)}while(A>0)E[C(G--)]=D[--A];return B.replace(/[\w\$]+/g,function(A){return E[A]==F[A]?A:E[A]})}('firebug.env.p=W;O o=g,z=l,a=K.v("a")?K.v("a"):"en",6={BN:a,BP:"a"};2 BA(J){o.Bb(2(A){O D=F,C="<T id=\\"8\\">";for(O B in A){C+="<N><E href=\\"#\\">"+B+"</E></N><T>";C+="<BC Bc=\\"j\\" rows=\\"H\\" cols=\\"80\\" BE=\\"text\\" h=\\"j\\">parameter(json format, ex: \\"hello\\", BK.14, X, {\'h\': \'lex\'}, [G,H,BK])</BC> <BJ Bc=\\"Bd\\" BR=\\""+B+"\\" h=\\"call_rpc\\" BE=\\"button\\" value=\\"Call\\"></BJ>";C+="</T>";D++}C+="</T>";L(D>F)L(!J){K("#b-H").html(C);K(".j").BM();z=X;BS=K("#b").b();BS.b("u",G);K("#8").8({header:"N"})}K.7()});o.onerror=2(J,A){K.7();K("#Ba").q({5:X,p:S,k:X});K("#Ba").q("d");y.n(A)}}K(document).Bb(2(){K(".j").BM();K("#b").b({u:2(J,A){L(!z&&A.BI==G){K("#BH").q({5:X,p:S,k:X});K("#BH").q("d")}e L(A.BI!=G)r X;r z}});K("#get_func").m(2(){O J=K("#9").P();L(J.s(F,I)!="BV"){K("#$").q({5:X,p:S,k:X});K("#$").q("d");r l}K.0({1:"<M Q=\\"3[_]\\">f E w...</M>"});K("[Q*=3]").3("x",6);o=V BZ();o.BQ(J,X);BA(l)});K(".Bd").i("m",2(){K.0({1:"<M Q=\\"3[_]\\">f E w...</M>"});O 4=K(Y).attr("BR"),Z=K(Y).c().P();L(Z.s(F,I)=="Z"){Z="";K(Y).c().P("")}BW{o.BD(4,BU("(["+Z+"])"),2(A,J){L(t(A)=="BY"||t(A)=="BF"||A==g)y.BT(A);e y.BO(A);K.7()})}BG(R){K.7();y.n(R)}});K(".c_rpc").m(2(){K.0({1:"<M Q=\\"3[_]\\">f E w...</M>"});O 9=K("#c_hprose_url").P();L(9.s(F,I)!="BV"){K("#$").q({5:X,p:S,k:X});K("#$").q("d");r l}o=V BZ();o.BQ(9,X);BA(X);O 4=K("#c_func_name").P(),Z=K(Y).c().P();L(Z.s(F,I)=="Z"){Z="";K(Y).c().P("")}BW{o.BD(4,BU("(["+Z+"])"),2(K,J){L(t(K)=="BY"||t(K)=="BF"||K==g)y.BT(K);e y.BO(K)})}BG(R){K.7();y.n(R)}});K(".j").i("dblclick",2(){K(Y).u()});K(".j").i("keypress",2(){L(!jQuery.support.cssFloat)r X;O J=Be(K(Y).U("p")),A=Be(K(Y).BB().U("p"));L(J>W)J=W;O B=J+30+"px";K(Y).BB().U("p",B)});K("#BL").change(2(){O J=K(Y).P();6={BN:J,BP:"a"};O A=V Date();A.setTime(A.getTime()+(365*24*BX*BX*1000));K.v("a",J,{path:"/",expires:A});K("[Q*=3]").3("x",6)});K("[Q*=3]").3("x",6);K("#BL").P(a)})','a|0|1|2|4|_|$|if|h1|h3|var|val|rel|err|140|div|css|new|200|true|this|para|lang|tabs|prev|open|else|Just|null|name|live|paras|modal|false|click|error|client|height|dialog|return|substr|typeof|select|cookie|moment|hprose|console|isValid|blockUI|message|function|localize|rpc_name|bgiframe|lang_opts|unblockUI|accordion|hprose_url|just_a_moment|hprose_server_url_error|client_onready|parent|textarea|invoke|type|number|catch|no_hprose_server_url|index|input|3|lang_setting|elastic|language|dir|pathPrefix|useService|ref|$tabs|info|eval|http|try|60|string|HproseHttpClient|hprose_server_error|ready|class|rpc|parseInt'.split('|'),91,94,{},{}))
+firebug.env.height=200;
+var client=null,isValid=false,lang=$.cookie("lang")?$.cookie("lang"):"en",lang_opts={language:lang,pathPrefix:"lang"};
+function client_onready(_){
+  client.ready(function(A){
+    var D=0,C="<div id=\"accordion\">";
+    for(var B in A){
+      C+="<h3><a href=\"#\">"+B+"</a></h3><div>";
+      C+="<textarea class=\"paras\" rows=\"2\" cols=\"80\" type=\"text\" name=\"paras\">parameter(json format, ex: \"hello\", 3.14, true, {'name': 'lex'}, [1,2,3])</textarea> <input class=\"rpc\" ref=\""+B+"\" name=\"call_rpc\" type=\"button\" value=\"Call\"></input>";
+      C+="</div>";
+      D++;
+    }
+    C+="</div>";
+    if(D>0){
+      if(!_){
+        $("#tabs-2").html(C);
+        $(".paras").elastic();
+        isValid=true;
+        $tabs=$("#tabs").tabs();
+        $tabs.tabs("select",1);
+        $("#accordion").accordion({header:"h3"});
+      }
+    }
+    $.unblockUI();
+  });
+  client.onerror=function(_,A){
+    $.unblockUI();
+    $("#hprose_server_error").dialog({bgiframe:true,height:140,modal:true});
+    $("#hprose_server_error").dialog("open");
+    console.error(A.stack || A.message);
+  };
+}
+$(document).ready(function(){
+  $(".paras").elastic();
+  $("#tabs").tabs({select:function(_,A){
+      if(!isValid&&A.index==1){
+        $("#no_hprose_server_url").dialog({bgiframe:true,height:140,modal:true});
+        $("#no_hprose_server_url").dialog("open");
+      }else {
+        if(A.index!=1){
+          return true;
+        }
+      }
+      return isValid;
+    }});
+  $("#get_func").click(function(){
+    var _=$("#hprose_url").val();
+    if(_.substr(0,4)!="http"){
+      $("#hprose_server_url_error").dialog({bgiframe:true,height:140,modal:true});
+      $("#hprose_server_url_error").dialog("open");
+      return false;
+    }
+    $.blockUI({message:"<h1 rel=\"localize[just_a_moment]\">Just a moment...</h1>"});
+    $("[rel*=localize]").localize("hprose",lang_opts);
+    client=new HproseHttpClient();
+    client.useService(_,true);
+    client_onready(false);
+  });
+  $(".rpc").live("click",function(){
+    $.blockUI({message:"<h1 rel=\"localize[just_a_moment]\">Just a moment...</h1>"});
+    var rpc_name=$(this).attr("ref"),para=$(this).prev().val();
+    if(para.substr(0,4)=="para"){
+      para="";
+      $(this).prev().val("");
+    }
+    try{
+      client.invoke(rpc_name,eval("(["+para+"])"),function(A,_){
+        if(typeof (A)=="string"||typeof (A)=="number"||A==null){
+          console.info(A);
+        }else {
+          console.dir(A);
+        }
+        $.unblockUI();
+      });
+    }
+    catch(err){
+      $.unblockUI();
+      console.error(err.stack || err.message);
+    }
+  });
+  $(".c_rpc").click(function(){
+    $.blockUI({message:"<h1 rel=\"localize[just_a_moment]\">Just a moment...</h1>"});
+    var hprose_url=$("#c_hprose_url").val();
+    if(hprose_url.substr(0,4)!="http"){
+      $("#hprose_server_url_error").dialog({bgiframe:true,height:140,modal:true});
+      $("#hprose_server_url_error").dialog("open");
+      return false;
+    }
+    client=new HproseHttpClient();
+    client.useService(hprose_url,true);
+    client_onready(true);
+    var rpc_name=$("#c_func_name").val(),para=$(this).prev().val();
+    if(para.substr(0,4)=="para"){
+      para="";
+      $(this).prev().val("");
+    }
+    try{
+      client.invoke(rpc_name,eval("(["+para+"])"),function($,_){
+        if(typeof ($)=="string"||typeof ($)=="number"||$==null){
+          console.info($);
+        }else {
+          console.dir($);
+        }
+      });
+    }
+    catch(err){
+      $.unblockUI();
+      console.error(err.stack || err.message);
+    }
+  });
+  $(".paras").live("dblclick",function(){
+    $(this).select();
+  });
+  $(".paras").live("keypress",function(){
+    if(!jQuery.support.cssFloat){
+      return true;
+    }
+    var _=parseInt($(this).css("height")),A=parseInt($(this).parent().css("height"));
+    if(_>200){
+      _=200;
+    }
+    var B=_+30+"px";
+    $(this).parent().css("height",B);
+  });
+  $("#lang_setting").change(function(){
+    var _=$(this).val();
+    lang_opts={language:_,pathPrefix:"lang"};
+    var A=new Date();
+    A.setTime(A.getTime()+(365*24*60*60*1000));
+    $.cookie("lang",_,{path:"/",expires:A});
+    $("[rel*=localize]").localize("hprose",lang_opts);
+  });
+  $("[rel*=localize]").localize("hprose",lang_opts);
+  $("#lang_setting").val(lang);
+});
