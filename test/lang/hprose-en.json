@@ -1,6 +1,6 @@
 { 
   hprose_server_url: "Hprose Server URL",
-  hprose_func_list: "Hprose Serer Function List",
+  hprose_func_list: "Hprose Server Function List",
   customize_hprose_func_call: "Customize Hprose Function Call",
   get_function_list: "Get Functions",
   function_name: "Function Name",
