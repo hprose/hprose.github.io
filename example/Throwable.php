@@ -10,19 +10,24 @@
 
 /**********************************************************\
  *                                                        *
- * Hprose/Http/Server.php                                 *
+ * Throwable.php                                          *
  *                                                        *
- * hprose http server class for php 5.3+                  *
+ * Throwable for php 7-                                   *
  *                                                        *
- * LastModified: Jul 17, 2016                             *
+ * LastModified: Jul 11, 2016                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Http;
-
-class Server extends Service {
-    public function start() {
-        $this->handle();
+if (!interface_exists("Throwable")) {
+    interface Throwable {
+        public function getMessage();
+        public function getCode();
+        public function getFile();
+        public function getLine();
+        public function getTrace();
+        public function getTraceAsString();
+        public function getPrevious();
+        public function __toString();
     }
 }

@@ -10,19 +10,26 @@
 
 /**********************************************************\
  *                                                        *
- * Hprose/Http/Server.php                                 *
+ * Hprose/Deferred.php                                    *
  *                                                        *
- * hprose http server class for php 5.3+                  *
+ * hprose Deferred class for php 5.3+                     *
  *                                                        *
- * LastModified: Jul 17, 2016                             *
+ * LastModified: Jul 11, 2015                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Http;
+namespace Hprose;
 
-class Server extends Service {
-    public function start() {
-        $this->handle();
+class Deferred {
+    public $promise;
+    public function __construct() {
+        $this->promise = new Future();
+    }
+    public function resolve($value) {
+        $this->promise->resolve($value);
+    }
+    public function reject($reason) {
+        $this->promise->reject($reason);
     }
 }

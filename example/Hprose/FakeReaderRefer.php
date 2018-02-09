@@ -10,27 +10,25 @@
 
 /**********************************************************\
  *                                                        *
- * Hprose/Symfony/Server.php                              *
+ * Hprose/FakeReaderRefer.php                             *
  *                                                        *
- * hprose symfony http server class for php 5.3+          *
+ * hprose FakeReaderRefer class for php 5.3+              *
  *                                                        *
- * LastModified: Apr 20, 2015                             *
+ * LastModified: Jul 11, 2016                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Symfony {
-    use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\HttpFoundation\Session\Session;
+namespace Hprose;
 
-    class Server extends Service {
-        public function start() {
-            $request = Request::createFromGlobals();
-            $response = new Response();
-            $session = new Session();
-            $session->start();
-            return $this->handle($request, $response, $session);
-        }
+use Exception;
+
+class FakeReaderRefer implements ReaderRefer {
+    public function set($val) {}
+    public function read($index) {
+        throw new Exception("Unexpected serialize tag '" .
+                            Tags::TagRef .
+                            "' in stream");
     }
+    public function reset() {}
 }

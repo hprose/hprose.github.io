@@ -10,19 +10,17 @@
 
 /**********************************************************\
  *                                                        *
- * Hprose/Yii/Server.php                                  *
+ * Hprose/Future/UncatchableException.php                 *
  *                                                        *
- * hprose yii http server class for php 5.3+              *
+ * UncatchableException for php 5.3+                      *
  *                                                        *
- * LastModified: Apr 20, 2015                             *
+ * LastModified: Jul 11, 2016                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Yii {
-    class Server extends Service {
-        public function start() {
-            return $this->handle(\Yii::$app);
-        }
-    }
-}
+namespace Hprose\Future;
+
+use Exception;
+
+class UncatchableException extends Exception {}

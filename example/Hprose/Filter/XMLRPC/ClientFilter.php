@@ -14,53 +14,55 @@
  *                                                        *
  * xml-rpc client filter class for php 5.3+               *
  *                                                        *
- * LastModified: Apr 2, 2015                              *
+ * LastModified: Jul 11, 2016                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Filter\XMLRPC {
-    class ClientFilter implements \Hprose\Filter {
-        function inputFilter($data, $context) {
-            $result = xmlrpc_decode($data, "UTF-8");
-            $stream = new \Hprose\BytesIO();
-            $writer = new \Hprose\Writer($stream, true);
-            if (isset($result['faultString'])) {
-                $stream->write(\Hprose\Tags::TagError);
-                $writer->writeString($result['faultString']);
-            }
-            else {
-                $stream->write(\Hprose\Tags::TagResult);
-                $writer->serialize($result);
-            }
-            $stream->write(\Hprose\Tags::TagEnd);
-            $data = $stream->toString();
-            unset($result);
-            unset($writer);
-            unset($stream);
-            return $data;
-        }
+namespace Hprose\Filter\XMLRPC;
 
-        function outputFilter($data, $context) {
-            $method = null;
-            $params = array();
-            $stream = new \Hprose\BytesIO($data);
-            $reader = new \Hprose\Reader($stream);
-            $tag = $stream->getc();
-            if ($tag === \Hprose\Tags::TagCall) {
-                $method = $reader->readString();;
-                $tag = $stream->getc();
-                if ($tag == \Hprose\Tags::TagList) {
-                    $reader->reset();
-                    $params = $reader->readListWithoutTag();
-                }
-            }
-            else {
-                throw new \Exception("Error Processing Request", 1);
-            }
-            unset($reader);
-            unset($stream);
-            return xmlrpc_encode_request($method, $params);
+use stdClass;
+use Exception;
+use Hprose\Filter;
+use Hprose\BytesIO;
+use Hprose\Writer;
+use Hprose\Reader;
+use Hprose\Tags;
+
+class ClientFilter implements Filter {
+    public function inputFilter($data, stdClass $context) {
+        $result = xmlrpc_decode($data, "UTF-8");
+        $stream = new BytesIO();
+        $writer = new Writer($stream, true);
+        if (isset($result['faultString'])) {
+            $stream->write(Tags::TagError);
+            $writer->writeString($result['faultString']);
         }
+        else {
+            $stream->write(Tags::TagResult);
+            $writer->serialize($result);
+        }
+        $stream->write(Tags::TagEnd);
+        return $stream->toString();
+    }
+
+    public function outputFilter($data, stdClass $context) {
+        $method = null;
+        $params = array();
+        $stream = new BytesIO($data);
+        $reader = new Reader($stream);
+        $tag = $stream->getc();
+        if ($tag === Tags::TagCall) {
+            $method = $reader->readString();
+            $tag = $stream->getc();
+            if ($tag ==Tags::TagList) {
+                $reader->reset();
+                $params = $reader->readListWithoutTag();
+            }
+        }
+        else {
+            throw new Exception("Error Processing Request", 1);
+        }
+        return xmlrpc_encode_request($method, $params);
     }
 }

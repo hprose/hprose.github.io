@@ -10,19 +10,19 @@
 
 /**********************************************************\
  *                                                        *
- * Hprose/Http/Server.php                                 *
+ * Hprose/WriterRefer.php                                 *
  *                                                        *
- * hprose http server class for php 5.3+                  *
+ * hprose writer reference interface for php 5.3+         *
  *                                                        *
- * LastModified: Jul 17, 2016                             *
+ * LastModified: Jul 11, 2016                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Http;
+namespace Hprose;
 
-class Server extends Service {
-    public function start() {
-        $this->handle();
-    }
+interface WriterRefer {
+    public function set($val);
+    public function write(BytesIO $stream, $val);
+    public function reset();
 }

@@ -10,19 +10,29 @@
 
 /**********************************************************\
  *                                                        *
- * Hprose/Http/Server.php                                 *
+ * Hprose/Socket/Timer.php                                *
  *                                                        *
- * hprose http server class for php 5.3+                  *
+ * hprose socket Timer class for php 5.3+                 *
  *                                                        *
- * LastModified: Jul 17, 2016                             *
+ * LastModified: Aug 10, 2016                             *
  * Author: Ma Bingyao <andot@hprose.com>                  *
  *                                                        *
 \**********************************************************/
 
-namespace Hprose\Http;
+namespace Hprose\Socket;
 
-class Server extends Service {
-    public function start() {
-        $this->handle();
+class Timer {
+    private $server;
+    public function __construct($server) {
+        $this->server = $server;
+    }
+    public function setTimeout($callback, $delay) {
+        return $this->server->after($delay, $callback);
+    }
+    public function clearTimeout($timerid) {
+        return $this->server->clear($timerid);
+    }
+    public function setImmediate($callback) {
+        $this->server->defer($callback);
     }
 }
